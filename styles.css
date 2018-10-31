@@ -1,0 +1,83 @@
+.navbar-toggle.force-left {
+    float: left;
+    margin-left: 10px;
+}
+
+.nav.navbar-nav.force-right {
+    float: right;
+    white-space: nowrap;
+    min-width: 500px;
+
+}
+
+.navbar-nav.nav-item li {
+    margin-left: 5;
+    padding: 20;
+}
+
+.my-nav-item {
+    padding: 5px;
+    margin: 5px;
+    color: white;
+}
+
+.my-nav-item a {
+    color: white;
+}
+
+div.col a img {
+    border-radius: 4px;
+    width: 100%
+}
+
+body {
+    padding-top: 85px;
+    margin-bottom: 50px;
+}
+
+h1 {
+    color: rgba(150, 150, 150, 1);
+    font-size: 24px;
+    font-weight: 500;
+}
+
+body {
+    background-image: url("https://d10xkldqejj5hr.cloudfront.net/content/images/HD_sitebackimage_5_poster3_compressed.jpg");
+}
+
+footer a {
+    color: #BFBFBF;
+}
+
+footer ul {
+    display: inline;
+    list-style: none;
+    padding-left: 0px;
+}
+
+footer li {
+    display: inline;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-inline-start: 0px;
+    color: #BFBFBF;
+}
+
+.footer-links li:first-child {
+    margin-left: 0px
+}
+
+.detail-dropdown {
+    margin-top: -20px;
+    margin-bottom: 20px;
+    background-color: white
+}
+
+.text-details {
+    box-sizing: content-box;
+    width: 50%;
+}
+
+#synopsis{
+
+}

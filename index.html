@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        $(function(){
+            $('#dataCollapse').on('show.bs.collapse', function() {
+                $("#myPara").text("Test");
+                $("#dataCollapse p").text("Div test");
+                console.log("Hi");
+            });
+        });
+        function loadDropdown(sectionId, titleId, dropdownId){
+            var myData = $.getJSON("dashboard.json", function(data) {
+                console.log("success");
+                //console.log(data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].Name);
+                var title = data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].Name;
+                var seasonName= data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].SeasonName;
+                var synopsis= data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].LongSynopsis;
+                console.log(title);
+                console.log(seasonName);
+                console.log(synopsis);
+                $(dropdownId).data("currentSection", sectionId);
+                $(dropdownId).data("currentTitle", titleId);
+                $(dropdownId + ' #title').text(title);
+                $(dropdownId + ' #seasonName').text(seasonName)
+                $(dropdownId + ' #synopsis').text(synopsis)
+
+            })
+                .done(function() {
+                    console.log("done");
+                })
+            if (($(dropdownId).data("currentSection") == sectionId) && ($(dropdownId).data("currentTitle") == titleId)){
+                $(dropdownId).collapse('toggle');
+            }
+            else if (!$(dropdownId).hasClass("show")){
+                $(dropdownId).collapse('toggle');
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <button class="btn" data-toggle="collapse" data-target="#dataCollapse" aria-expanded="true" aria-controls="dataCollapse">
+        Button</button>
+    <div class="collapse" id="dataCollapse">
+        <p id="myPara"></p>
+        <p id="myPara"></p>
+        <p id="myPara"></p>
+        <p id="myPara"></p>
+        <p>This is my collapsible</p>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(0,0,0,0.85)">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#theNavBar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="https://d10xkldqejj5hr.cloudfront.net/content/images/HIDIVE_logo.svg" height="30px"></a>
+            </div>
+            <ul class="nav navbar-nav ml-auto flex-row justify-content-end d-lg-none">
+                <li class="my-nav-item">
+                    <a href="#">FREE TRIAL!</a>
+                </li>
+                <li class="my-nav-item">
+                    <a href="#">S</a>
+                </li>
+                <li class="my-nav-item">
+                    <a href="#">P</a>
+                </li>
+            </ul>
+            <div class="collapse navbar-collapse" id="theNavBar">
+                <ul class="navbar-nav">
+                    <li class="my-nav-item">
+                        <a href="#">SIMULCASTS</a>
+                    </li>
+                    <li class="my-nav-item">
+                        <a href="#">DUBS</a>
+                    </li>
+                    <li class="my-nav-item">
+                        <a href="#">SERIES</a>
+                    </li>
+                    <li class="my-nav-item">
+                        <a href="#">MOVIES</a>
+                    </li>
+                    <li class="my-nav-item">
+                        <a href="#">FREE</a>
+                    </li>
+                    <li class="my-nav-item d-none d-lg-flex"> | </li>
+                    <li class="my-nav-item">
+                        <a href="#">SCHEDULE</a>
+                    </li>
+                    <li class="my-nav-item d">
+                        <a href="#">SHOP</a>
+                    </li>
+                    <li class="my-nav-item">
+                        <a href="#">NEWS</a>
+                    </li>
+
+                </ul>
+
+            </div>
+            <ul class="nav navbar-nav ml-auto flex-row justify-content-end d-none d-lg-flex ">
+                <li class="my-nav-item">
+                    <a href="#">FREE TRIAL!</a>
+                </li>
+                <li class="my-nav-item">
+                    <a href="#">S</a>
+                </li>
+                <li class="my-nav-item">
+                    <a href="#">P</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="fixed-top" style="text-align: center;background-color: rgba(0,174,240,1); margin-top: 62px">
+        <span style="color:white;text-shadow: 1px 1px black">Get Simulcasts, Dubs, and lots more with a HIDIVE account. <a href="#" style="color:white"><u><b>Start your free 7 day trial!</b></u></a></span>
+    </div>
+
+    <div class="container" style="background-color: #222325;padding-bottom: 30px">
+        <div style="padding-top: 15px;padding-bottom: 15px">
+            <a href="#"><img src="https://d10xkldqejj5hr.cloudfront.net/slides/2018/10/HIDIVE_GlobalBanner_Website_XboxOne_1110x76_2.jpg" width="100%"></a>
+        </div>
+
+        <div id="bigCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval:4000 pause="hover">
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/slides/2018/10/HIDIVE_HOMEcarousel_FreeEPisode_HalloweenTheme_Hozuki21250x500.gif" alt="First slide"></a>
+                </div>
+                <div class="carousel-item">
+                    <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/slides/2018/10/HIDIVE_HOMEcarousel_Haloween_20off_3.gif" alt="Second slide"></a>
+                </div>
+                <div class="carousel-item">
+                    <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/slides/2018/08/HIDIVE_HOMEcarousel_FreeeeAnime_1250x500.gif" alt="Third slide"></a>
+                </div>
+            </div>
+            <ol class="carousel-indicators">
+                <li data-target="#bigCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#bigCarousel" data-slide-to="1"></li>
+                <li data-target="#bigCarousel" data-slide-to="2"></li>
+            </ol>
+            <a class="carousel-control-prev" href="#bigCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#bigCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div id="titleCarousels">
+            <h1>FREE EPISODES</h1>
+            <div id="freeCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '0', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/YYP/YYP_01_MASTER_300x169.jpg">
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '1', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/KON/KON_02_MASTER_300x169.jpg">
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '2', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/BTB/BTB_MOVIE1_MASTER_300x169.jpg">
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '3', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/LSF/LSF_01_MASTER_300x169.jpg">
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '4', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/AKB/AKB_01_MASTER_300x169.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '5', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/AOA/AOA_01_MASTER_300x169.jpg">
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '6', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/WPG/WPG_MASTER_300x169.jpg">
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '7', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/CHU/CHU_01_MASTER_300x169.jpg">
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '8', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/CAA/CAA_MASTER_300x169.jpg">
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <input type="image" onclick="loadDropdown('0', '9', '#freeCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/SHV/SHV_01_MASTER_300x169_01.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#freeCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#freeCarousel" data-slide-to="1"></li>
+                </ol>
+                <a class="carousel-control-prev" href="#freeCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#freeCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+
+            </div>
+            <div class="collapse detail-dropdown" id="freeCollapse" data-parent="#titleCarousels" data-current-section="-1" data-current-title="-1">
+                <div class="text-details">
+                    <p id="title"></p>
+                    <h2 id="seasonName"></h2>
+                    <p id="synopsis"></p>
+                </div>
+            </div>
+            <h1>SIMULCASTS</h1>
+
+            <div id="simulcastCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#simulcastCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#simulcastCarousel" data-slide-to="1"></li>
+                    <li data-target="#simulcastCarousel" data-slide-to="2"></li>
+                </ol>
+                <a class="carousel-control-prev" href="#simulcastCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#simulcastCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <h1>DUBS</h1>
+            <div id="dubsCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#dubsCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#dubsCarousel" data-slide-to="1"></li>
+                    <li data-target="#dubsCarousel" data-slide-to="2"></li>
+                </ol>
+                <a class="carousel-control-prev" href="#dubsCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#dubsCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <h1>EXCLUSIVES</h1>
+            <div id="exclusivesCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#exclusivesCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#exclusivesCarousel" data-slide-to="1"></li>
+                    <li data-target="#exclusivesCarousel" data-slide-to="2"></li>
+                </ol>
+                <a class="carousel-control-prev" href="#exclusivesCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#exclusivesCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <h1>RECENTLY ADDED</h1>
+            <div id="recentCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#recentCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#recentCarousel" data-slide-to="1"></li>
+                    <li data-target="#recentCarousel" data-slide-to="2"></li>
+                </ol>
+                <a class="carousel-control-prev" href="#recentCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#recentCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <h1>TRENDING NOW</h1>
+            <div id="trendingCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#trendingCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#trendingCarousel" data-slide-to="1"></li>
+                    <li data-target="#trendingCarousel" data-slide-to="2"></li>
+                </ol>
+                <a class="carousel-control-prev" href="#trendingCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#trendingCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <h1>MOST POPULAR</h1>
+            <div id="popularCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                            <div class="col" style="padding-left: 2px;padding-right: 2px">
+                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#popularCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#popularCarousel" data-slide-to="1"></li>
+                    <li data-target="#popularCarousel" data-slide-to="2"></li>
+                </ol>
+                <a class="carousel-control-prev" href="#popularCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#popularCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <footer id="my-footer" style="font-size: 90%;">
+            <div class="row">
+                <div class="col-9">
+                    <ul class="footer-links">
+                        <li><a href="#">Sign Up</a></li>
+                        <li>|</li>
+                        <li><a href="#">Help Center</a></li>
+                        <li>|</li>
+                        <li><a href="#">About Us</a></li>
+                        <li>|</li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li>|</li>
+                        <li><a href="#">Careers</a></li>
+                        <li>|</li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li>|</li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li>|</li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <ul style="float:right">
+                        <li><a href="#">[ ]</a></li>
+                        <li><a href="#">[ ]</a></li>
+                        <li><a href="#">[ ]</a></li>
+                        <li><a href="#">[ ]</a></li>
+                    </ul>
+                </div>
+            </div>
+            <span style="color: #BFBFBF">HIDIVE and the logos <sup>TM</sup> and &copy; HIDIVE, LLC.</span>
+        </footer>
+    </div>
+</body>
+
+</html>
