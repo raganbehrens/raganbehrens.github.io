@@ -25,15 +25,18 @@
                 //console.log(data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].Name);
                 var title = data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].Name;
                 var seasonName= data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].SeasonName;
-                var synopsis= data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].LongSynopsis;
+                var synopsis= data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].MediumSynopsis;
+                var imageUrl = 'https:' + data.Data.TitleRows[parseInt(sectionId)].Titles[parseInt(titleId)].KeyArtUrl;
                 console.log(title);
                 console.log(seasonName);
                 console.log(synopsis);
+                console.log(imageUrl);
                 $(dropdownId).data("currentSection", sectionId);
                 $(dropdownId).data("currentTitle", titleId);
                 $(dropdownId + ' #title').text(title);
                 $(dropdownId + ' #seasonName').text(seasonName)
                 $(dropdownId + ' #synopsis').text(synopsis)
+                $(dropdownId + ' .details-right').css('background-image', 'url(' + imageUrl + ')');
 
             })
                 .done(function() {
@@ -45,6 +48,12 @@
             else if (!$(dropdownId).hasClass("show")){
                 $(dropdownId).collapse('toggle');
             }
+        }
+
+        function navigateDetails(element, dropdownId){
+            $(dropdownId + ' .active').removeClass("active")
+            $(element).addClass("active");
+            console.log("in navigate details");
         }
     </script>
 </head>
@@ -209,70 +218,75 @@
 
             </div>
             <div class="collapse detail-dropdown" id="freeCollapse" data-parent="#titleCarousels" data-current-section="-1" data-current-title="-1">
-                <div class="text-details">
-                    <p id="title"></p>
-                    <h2 id="seasonName"></h2>
-                    <p id="synopsis"></p>
+                <div class="row">
+                    <div class="col details-left">
+                        <div class="text-details">
+                            <p id="title"></p>
+                            <h2 id="seasonName"></h2>
+                            <div class="details-buttons">
+                                <button class="btn btn-primary">ADD TO QUEUE</button>
+                                <button class="btn btn-primary">ADD FAVORITE</button>
+                            </div>
+                            <p id="synopsis"></p>
+                        </div>
+                    </div>
+                    <div class="col details-right">
+                        <div class="player"  style="background-image: linear-gradient(to right, rgb(18, 18, 20) 12%, rgba(18, 18, 20, 0) 100%)">
+                        </div>
+                        <img id='details-img' width=600 height=225>
+                    </div>
+                </div>
+                <div class="details-nav">
+                    <span onclick="navigateDetails(this, '#freeCollapse');" class="active">
+                        INFORMATION
+                    </span>
+                    <span onclick="navigateDetails(this, '#freeCollapse')" class="">
+                        EPISODES
+                    </span>
+                    <span onclick="navigateDetails(this, '#freeCollapse')" class="">
+                        YOU MIGHT LIKE
+                    </span>
                 </div>
             </div>
+            
             <h1>SIMULCASTS</h1>
-
             <div id="simulcastCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '0', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/GIT/GIT_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '1', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/SPY/SPY_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '2', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/GBS/GBS_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '3', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/BIB/BIB_01_MASTER_300x169_01.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '4', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg">
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '5', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/RST/RST_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '6', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/TNM/TNM_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '7', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/GLG/GLG_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '8', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/LHZ/LHZ_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('2', '9', '#simulcastCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/HKY/HKY_MASTER_300x169.jpg">
                             </div>
                         </div>
                     </div>
@@ -280,7 +294,6 @@
                 <ol class="carousel-indicators">
                     <li data-target="#simulcastCarousel" data-slide-to="0" class="active"></li>
                     <li data-target="#simulcastCarousel" data-slide-to="1"></li>
-                    <li data-target="#simulcastCarousel" data-slide-to="2"></li>
                 </ol>
                 <a class="carousel-control-prev" href="#simulcastCarousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -291,63 +304,77 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <div class="collapse detail-dropdown" id="simulcastCollapse" data-parent="#titleCarousels" data-current-section="-1" data-current-title="-1">
+                <div class="row">
+                    <div class="col details-left">
+                        <div class="text-details">
+                            <p id="title"></p>
+                            <h2 id="seasonName"></h2>
+                            <div class="details-buttons">
+                                <button class="btn btn-primary">ADD TO QUEUE</button>
+                                <button class="btn btn-primary">ADD FAVORITE</button>
+                            </div>
+                            <p id="synopsis"></p>
+                        </div>
+                    </div>
+                    <div class="col details-right">
+                        <div class="player"  style="background-image: linear-gradient(to right, rgb(18, 18, 20) 12%, rgba(18, 18, 20, 0) 100%)">
+
+                        </div>
+                        <img id='details-img' width=600 height=225>
+                    </div>
+                </div>
+                <div class="details-nav">
+                    <span onclick="navigateDetails(this, '#simulcastCollapse');" class="active">
+                        INFORMATION
+                    </span>
+                    <span onclick="navigateDetails(this, '#simulcastCollapse')" class="">
+                        EPISODES
+                    </span>
+                    <span onclick="navigateDetails(this, '#simulcastCollapse')" class="">
+                        YOU MIGHT LIKE
+                    </span>
+                </div>
+            </div>
+
             <h1>DUBS</h1>
             <div id="dubsCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '0', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/SHV/SHV_01_MASTER_300x169_01.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '1', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/TBD/TBD_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '2', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/TNF/TNF_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '3', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/PRP/princess-principal_PRP_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '4', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/SPS/SPS_01_MASTER_300x169.jpg">
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '5', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/IND/IND_03_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '6', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/NGM/NGM_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '7', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/NGL/NGL_MOVIE_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '8', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/YYP/YYP_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('4', '9', '#dubsCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/AGM/AGM_01_MASTER_300x169.jpg">
                             </div>
                         </div>
                     </div>
@@ -355,7 +382,6 @@
                 <ol class="carousel-indicators">
                     <li data-target="#dubsCarousel" data-slide-to="0" class="active"></li>
                     <li data-target="#dubsCarousel" data-slide-to="1"></li>
-                    <li data-target="#dubsCarousel" data-slide-to="2"></li>
                 </ol>
                 <a class="carousel-control-prev" href="#dubsCarousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -366,44 +392,76 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <div class="collapse detail-dropdown" id="dubsCollapse" data-parent="#titleCarousels" data-current-section="-1" data-current-title="-1">
+                <div class="row">
+                        <div class="col details-left">
+                            <div class="text-details">
+                                <p id="title"></p>
+                                <h2 id="seasonName"></h2>
+                                <div class="details-buttons">
+                                    <button class="btn btn-primary">ADD TO QUEUE</button>
+                                    <button class="btn btn-primary">ADD FAVORITE</button>
+                                </div>
+                                <p id="synopsis"></p>
+                            </div>
+                        </div>
+                        <div class="col details-right">
+                            <div class="player"  style="background-image: linear-gradient(to right, rgb(18, 18, 20) 12%, rgba(18, 18, 20, 0) 100%)">
+                            </div>
+                            <img id='details-img' width=600 height=225>
+                        </div>
+                    </div>
+                <div class="details-nav">
+                    <span onclick="navigateDetails(this, '#dubsCollapse');" class="active">
+                        INFORMATION
+                    </span>
+                    <span onclick="navigateDetails(this, '#dubsCollapse')" class="">
+                        EPISODES
+                    </span>
+                    <span onclick="navigateDetails(this, '#dubsCollapse')" class="">
+                        YOU MIGHT LIKE
+                    </span>
+                </div>
+            </div>
+
             <h1>EXCLUSIVES</h1>
             <div id="exclusivesCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '0', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/RLG/RLG_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '1', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/BIB/BIB_01_MASTER_300x169_01.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '2', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/MCF/MCF_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '3', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/SHV/SHV_01_MASTER_300x169_01.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '4', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/TBD/TBD_01_MASTER_300x169.jpg">
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '5', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/GBS/GBS_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '6', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/SPY/SPY_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '7', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/GIT/GIT_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '8', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/TNF/TNF_01_MASTER_300x169.jpg">
                             </div>
                             <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
+                                <input type="image" onclick="loadDropdown('5', '9', '#exclusivesCollapse');" style="width: 100%" src="https://d10xkldqejj5hr.cloudfront.net/titles/GAR/GAR_SPECIAL_MASTER_300x169.jpg">
                             </div>
                         </div>
                     </div>
@@ -441,6 +499,38 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <div class="collapse detail-dropdown" id="exclusivesCollapse" data-parent="#titleCarousels" data-current-section="-1" data-current-title="-1">
+                <div class="row">
+                        <div class="col details-left">
+                            <div class="text-details">
+                                <p id="title"></p>
+                                <h2 id="seasonName"></h2>
+                                <div class="details-buttons">
+                                    <button class="btn btn-primary">ADD TO QUEUE</button>
+                                    <button class="btn btn-primary">ADD FAVORITE</button>
+                                </div>
+                                <p id="synopsis"></p>
+                            </div>
+                        </div>
+                        <div class="col details-right">
+                            <div class="player"  style="background-image: linear-gradient(to right, rgb(18, 18, 20) 12%, rgba(18, 18, 20, 0) 100%)">
+                            </div>
+                            <img id='details-img' width=600 height=225>
+                        </div>
+                    </div>
+                <div class="details-nav">
+                    <span onclick="navigateDetails(this, '#exclusivesCollapse');" class="active">
+                        INFORMATION
+                    </span>
+                    <span onclick="navigateDetails(this, '#exclusivesCollapse')" class="">
+                        EPISODES
+                    </span>
+                    <span onclick="navigateDetails(this, '#exclusivesCollapse')" class="">
+                        YOU MIGHT LIKE
+                    </span>
+                </div>
+            </div>
+
             <h1>RECENTLY ADDED</h1>
             <div id="recentCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
                 <div class="carousel-inner">
@@ -482,30 +572,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                            <div class="col" style="padding-left: 2px;padding-right: 2px">
-                                <a href="#"><img class="d-block w-100" src="https://d10xkldqejj5hr.cloudfront.net/titles/OSP/OSP_01_MASTER_300x169.jpg" alt="First slide"></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <ol class="carousel-indicators">
                     <li data-target="#recentCarousel" data-slide-to="0" class="active"></li>
                     <li data-target="#recentCarousel" data-slide-to="1"></li>
-                    <li data-target="#recentCarousel" data-slide-to="2"></li>
                 </ol>
                 <a class="carousel-control-prev" href="#recentCarousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -516,6 +586,14 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <div class="collapse detail-dropdown" id="freeCollapse" data-parent="#titleCarousels" data-current-section="-1" data-current-title="-1">
+                <div class="text-details">
+                    <p id="title"></p>
+                    <h2 id="seasonName"></h2>
+                    <p id="synopsis"></p>
+                </div>
+            </div>
+
             <h1>TRENDING NOW</h1>
             <div id="trendingCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px" data-interval="false">
                 <div class="carousel-inner">

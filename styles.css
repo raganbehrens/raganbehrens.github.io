@@ -43,6 +43,7 @@ h1 {
 
 body {
     background-image: url("https://d10xkldqejj5hr.cloudfront.net/content/images/HD_sitebackimage_5_poster3_compressed.jpg");
+    background-attachment: fixed;
 }
 
 footer a {
@@ -70,14 +71,91 @@ footer li {
 .detail-dropdown {
     margin-top: -20px;
     margin-bottom: 20px;
-    background-color: white
+    background-color: rgb(18, 18, 20);
+}
+
+#title {
+    color: rgba(0,174,240,1);
+    margin-top: 15px;
+    margin-bottom: 0;
+    line-height: 1.0;
+    font-size: 36px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+#seasonName {
+    color: rgba(150,150,150,1);
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+#synopsis{
+    color: white;
+    font-size: 14px;
 }
 
 .text-details {
     box-sizing: content-box;
-    width: 50%;
+    width: 580px;
 }
 
-#synopsis{
+.carousel-control-prev {
+    left: -5%;
+    width: 10%;
+    padding-bottom: 20px;
+}
 
+.carousel-control-next {
+    right: -5%;
+    width: 10%;
+    padding-bottom: 20px;
+}
+
+.col.details-left {
+    padding-left: 30px;
+    width: 400px;
+    max-width: 400px;
+    height: 400px;
+    z-index: +1;
+}
+.col.details-right {
+    width: 100%;
+    height: 400px;
+    padding-left:0;
+    margin-right: 15px;
+}
+
+.details-buttons {
+    margin-bottom: 20px;
+}
+
+.details-buttons button {
+    line-height: .7;
+    background-color: rgba(0,174,240,1);
+}
+
+.details-nav {
+    padding-top: 50px;
+    margin-top:0px;
+    z-index: +4;
+    background-image: linear-gradient(rgba(2, 2, 2, 0) 0%, rgb(2, 2, 2) 63%, rgb(2, 2, 2) 100%);
+    background-clip: padding-box;
+    text-align: center;
+}
+
+.details-nav span {
+    color:rgb(167, 172, 178);
+    margin: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.details-nav .active {
+    border-bottom: 5px solid orange;
+}
+
+.player{
+    height: 100%;
 }
