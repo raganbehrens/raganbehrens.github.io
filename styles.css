@@ -101,6 +101,12 @@ footer li {
     width: 580px;
 }
 
+@media (max-width: 768px) {
+    .text-details {
+        width: 100%;
+    }
+}
+
 .carousel-control-prev {
     left: -5%;
     width: 10%;
