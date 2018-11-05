@@ -113,6 +113,24 @@ footer li {
     padding-bottom: 20px;
 }
 
+.carousel-item .col {
+    padding-left: 2px;
+    padding-right: 2px;
+    max-width: 100%;
+}
+
+.carousel-item .row {
+    width: 100%;
+}
+
+.carousel-item input {
+    width: 100%;
+}
+
+.carousel-indicators {
+    bottom: 5px;
+}
+
 .col.details-left {
     padding-left: 30px;
     width: 400px;
